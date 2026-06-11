@@ -15,11 +15,11 @@
 
       <main class="content">
         <section class="profile page__section">
-          <div class="profile__image" style="background-image: url('./assets/avatar-jDl9RI_U.jpg')"></div>
+          <div class="profile__image"></div>
           <div class="profile__info">
-            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <h1 class="profile__title"></h1>
             <button class="profile__edit-button" type="button"></button>
-            <p class="profile__description">Исследователь океана</p>
+            <p class="profile__description"></p>
           </div>
           <button class="profile__add-button" type="button"></button>
         </section>
@@ -33,6 +33,7 @@
         <p class="footer__copyright">© 2025 Mesto Russia</p>
       </footer>
 
+      <!-- Попап редактирования профиля -->
       <div class="popup popup_type_edit">
         <div class="popup__content">
           <button type="button" class="popup__close"></button>
@@ -49,6 +50,7 @@
         </div>
       </div>
 
+      <!-- Попап добавления карточки -->
       <div class="popup popup_type_new-card">
         <div class="popup__content">
           <button type="button" class="popup__close"></button>
@@ -65,6 +67,7 @@
         </div>
       </div>
 
+      <!-- Попап просмотра изображения -->
       <div class="popup popup_type_image">
         <div class="popup__content popup__content_content_image">
           <button type="button" class="popup__close"></button>
@@ -73,6 +76,7 @@
         </div>
       </div>
 
+      <!-- Попап обновления аватара -->
       <div class="popup popup_type_edit-avatar">
         <div class="popup__content">
           <button type="button" class="popup__close"></button>
@@ -85,9 +89,19 @@
           </form>
         </div>
       </div>
+
+      <!-- Попап статистики пользователей -->
+      <div class="popup popup_type_info">
+        <div class="popup__content">
+          <button type="button" class="popup__close"></button>
+          <h3 class="popup__title">Статистика пользователей</h3>
+          <div class="popup__info-list"></div>
+        </div>
+      </div>
     </div>
 
 
+    <!-- Шаблон карточки -->
     <template id="card-template">
       <li class="places__item card">
         <img class="card__image" src="" alt="" />
@@ -98,9 +112,26 @@
           <h2 class="card__title"></h2>
           <div class="card__likes">
             <button type="button" class="card__like-button"></button>
+            <span class="card__like-count"></span>
           </div>
         </div>
       </li>
+    </template>
+
+    <!-- Шаблон строки статистики -->
+    <template id="popup-info-definition-template">
+      <div class="popup__info-item">
+        <span class="popup__info-term"></span>
+        <span class="popup__info-definition"></span>
+      </div>
+    </template>
+
+    <!-- Шаблон пользователя -->
+    <template id="popup-info-user-preview-template">
+      <div class="popup__info-user">
+        <span class="popup__info-user-name"></span>
+        <span class="popup__info-user-count"></span>
+      </div>
     </template>
   </body>
 </html>
