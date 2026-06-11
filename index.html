@@ -4,8 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mesto</title>
-    <script type="module" crossorigin src="./assets/index-DoORP-il.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-D2z4Cjqv.css">
+    <link rel="stylesheet" href="./assets/index-D2z4Cjqv.css">
   </head>
   <body class="page">
     <div class="page__content">
@@ -15,11 +14,11 @@
 
       <main class="content">
         <section class="profile page__section">
-          <div class="profile__image" style="background-image: url('./assets/avatar-jDl9RI_U.jpg')"></div>
+          <div class="profile__image"></div>
           <div class="profile__info">
-            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <h1 class="profile__title"></h1>
             <button class="profile__edit-button" type="button"></button>
-            <p class="profile__description">Исследователь океана</p>
+            <p class="profile__description"></p>
           </div>
           <button class="profile__add-button" type="button"></button>
         </section>
@@ -33,6 +32,7 @@
         <p class="footer__copyright">© 2025 Mesto Russia</p>
       </footer>
 
+      <!-- Попап редактирования профиля -->
       <div class="popup popup_type_edit">
         <div class="popup__content">
           <button type="button" class="popup__close"></button>
@@ -49,6 +49,7 @@
         </div>
       </div>
 
+      <!-- Попап добавления карточки -->
       <div class="popup popup_type_new-card">
         <div class="popup__content">
           <button type="button" class="popup__close"></button>
@@ -65,6 +66,7 @@
         </div>
       </div>
 
+      <!-- Попап просмотра изображения -->
       <div class="popup popup_type_image">
         <div class="popup__content popup__content_content_image">
           <button type="button" class="popup__close"></button>
@@ -73,6 +75,7 @@
         </div>
       </div>
 
+      <!-- Попап обновления аватара -->
       <div class="popup popup_type_edit-avatar">
         <div class="popup__content">
           <button type="button" class="popup__close"></button>
@@ -85,9 +88,20 @@
           </form>
         </div>
       </div>
+
+      <!-- Попап статистики пользователей -->
+      <div class="popup popup_type_info">
+        <div class="popup__content">
+          <button type="button" class="popup__close"></button>
+          <h3 class="popup__title">Статистика пользователей</h3>
+          <div class="popup__info-list"></div>
+        </div>
+      </div>
     </div>
 
+    <script src="./assets/index-dbJsqvtx.js" type="module"></script>
 
+    <!-- Шаблон карточки -->
     <template id="card-template">
       <li class="places__item card">
         <img class="card__image" src="" alt="" />
@@ -98,9 +112,177 @@
           <h2 class="card__title"></h2>
           <div class="card__likes">
             <button type="button" class="card__like-button"></button>
+            <span class="card__like-count"></span>
           </div>
         </div>
       </li>
     </template>
+
+    <!-- Шаблон строки статистики -->
+    <template id="popup-info-definition-template">
+      <div class="popup__info-item">
+        <span class="popup__info-term"></span>
+        <span class="popup__info-definition"></span>
+      </div>
+    </template>
+
+    <!-- Шаблон пользователя -->
+    <template id="popup-info-user-preview-template">
+      <div class="popup__info-user">
+        <span class="popup__info-user-name"></span>
+        <span class="popup__info-user-count"></span>
+      </div>
+    </template>
+
+    <style>
+      .popup__info-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .popup__info-term {
+        font-weight: 600;
+      }
+      .popup__info-definition {
+        color: #2c3e50;
+      }
+      .popup__info-separator {
+        height: 1px;
+        background: #e0e0e0;
+        margin: 15px 0;
+      }
+      .popup__info-user {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+        font-size: 14px;
+      }
+      .popup__info-user-name {
+        font-weight: 400;
+      }
+      .popup__info-user-count {
+        color: #666;
+      }
+      .logo {
+        cursor: pointer;
+      }
+    </style>
+
+    <script>
+      // Функции для статистики
+      const formatDate = (date) => date.toLocaleDateString("ru-RU", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+
+      const getCardWord = (count) => {
+        if (count % 10 === 1 && count % 100 !== 11) return "карточка";
+        if ([2, 3, 4].includes(count % 10) && ![12, 13, 14].includes(count % 100)) return "карточки";
+        return "карточек";
+      };
+
+      const popup = document.querySelector(".popup_type_info");
+      const infoList = document.querySelector(".popup__info-list");
+      const termTemplate = document.querySelector("#popup-info-definition-template");
+      const userTemplate = document.querySelector("#popup-info-user-preview-template");
+
+      const createInfoString = (term, definition) => {
+        const el = termTemplate.content.cloneNode(true);
+        el.querySelector(".popup__info-term").textContent = term;
+        el.querySelector(".popup__info-definition").textContent = definition;
+        return el;
+      };
+
+      const createUserPreview = (name, count) => {
+        const el = userTemplate.content.cloneNode(true);
+        el.querySelector(".popup__info-user-name").textContent = name;
+        el.querySelector(".popup__info-user-count").textContent = `${count} ${getCardWord(count)}`;
+        return el;
+      };
+
+      const openModal = (modal) => {
+        modal.classList.add("popup_is-opened");
+        const closeByEsc = (e) => {
+          if (e.key === "Escape") {
+            modal.classList.remove("popup_is-opened");
+            document.removeEventListener("keydown", closeByEsc);
+          }
+        };
+        document.addEventListener("keydown", closeByEsc);
+      };
+
+      document.querySelectorAll(".popup__close").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".popup_is-opened").forEach(p => p.classList.remove("popup_is-opened"));
+        });
+      });
+
+      document.querySelectorAll(".popup").forEach(popup => {
+        popup.addEventListener("click", (e) => {
+          if (e.target === popup) {
+            popup.classList.remove("popup_is-opened");
+          }
+        });
+      });
+
+      const handleLogoClick = () => {
+        infoList.innerHTML = '<div style="text-align:center;padding:20px;">Загрузка...</div>';
+        openModal(popup);
+        
+        fetch("https://mesto.nomoreparties.co/v1/apf-cohort-203/cards", {
+          headers: { authorization: "372f2f36-3b26-4143-83bf-18a1756e2c84" }
+        })
+          .then(res => res.json())
+          .then(cards => {
+            if (!cards || cards.length === 0) {
+              infoList.innerHTML = '<div style="text-align:center;padding:20px;">Нет данных</div>';
+              return;
+            }
+            
+            infoList.innerHTML = "";
+            
+            const sorted = [...cards].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            const earliest = new Date(sorted[sorted.length - 1].createdAt);
+            const latest = new Date(sorted[0].createdAt);
+            
+            const userStats = {};
+            cards.forEach(card => {
+              const name = card.owner.name;
+              userStats[name] = (userStats[name] || 0) + 1;
+            });
+            
+            const totalUsers = Object.keys(userStats).length;
+            const maxCards = Math.max(...Object.values(userStats));
+            const usersWithMax = Object.entries(userStats).filter(([_, c]) => c === maxCards).map(([n]) => n).join(", ");
+            
+            infoList.append(createInfoString("Всего карточек:", cards.length));
+            infoList.append(createInfoString("Первая создана:", formatDate(earliest)));
+            infoList.append(createInfoString("Последняя создана:", formatDate(latest)));
+            infoList.append(createInfoString("Всего пользователей:", totalUsers));
+            infoList.append(createInfoString("Максимум карточек:", `${maxCards} (${usersWithMax})`));
+            
+            const sep = document.createElement("div");
+            sep.classList.add("popup__info-separator");
+            infoList.append(sep);
+            infoList.append(createInfoString("Все пользователи:", ""));
+            
+            Object.entries(userStats).sort((a, b) => b[1] - a[1]).forEach(([name, count]) => {
+              infoList.append(createUserPreview(name, count));
+            });
+          })
+          .catch(err => {
+            console.log(err);
+            infoList.innerHTML = '<div style="color:red;text-align:center;padding:20px;">Ошибка загрузки данных</div>';
+          });
+      };
+
+      const logo = document.querySelector(".logo");
+      if (logo) {
+        logo.addEventListener("click", handleLogoClick);
+        logo.style.cursor = "pointer";
+      }
+    </script>
   </body>
 </html>
