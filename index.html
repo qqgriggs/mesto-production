@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mesto</title>
-    <link rel="stylesheet" href="https://qqgriggs.github.io/mesto-production/assets/index-43w6Gb0l.css">
+    <link rel="stylesheet" href="./src/pages/index.css" />
   </head>
   <body class="page">
     <div class="page__content">
       <header class="header page__section">
-        <img src="https://qqgriggs.github.io/mesto-production/assets/logo-C_QQpFK1.svg" alt="Логотип" class="logo header__logo" />
+        <img src="./src/images/logo.svg" alt="Логотип" class="logo header__logo" />
       </header>
 
       <main class="content">
@@ -32,6 +32,7 @@
         <p class="footer__copyright">© 2025 Mesto Russia</p>
       </footer>
 
+      <!-- Попап редактирования профиля -->
       <div class="popup popup_type_edit">
         <div class="popup__content">
           <button type="button" class="popup__close"></button>
@@ -48,6 +49,7 @@
         </div>
       </div>
 
+      <!-- Попап добавления карточки -->
       <div class="popup popup_type_new-card">
         <div class="popup__content">
           <button type="button" class="popup__close"></button>
@@ -64,6 +66,7 @@
         </div>
       </div>
 
+      <!-- Попап просмотра изображения -->
       <div class="popup popup_type_image">
         <div class="popup__content popup__content_content_image">
           <button type="button" class="popup__close"></button>
@@ -72,6 +75,7 @@
         </div>
       </div>
 
+      <!-- Попап обновления аватара -->
       <div class="popup popup_type_edit-avatar">
         <div class="popup__content">
           <button type="button" class="popup__close"></button>
@@ -84,10 +88,20 @@
           </form>
         </div>
       </div>
+
+      <!-- ПОПАП СТАТИСТИКИ (ДОБАВИТЬ ЭТОТ БЛОК) -->
+      <div class="popup popup_type_info">
+        <div class="popup__content">
+          <button type="button" class="popup__close"></button>
+          <h3 class="popup__title">Статистика пользователей</h3>
+          <div class="popup__info-list"></div>
+        </div>
+      </div>
     </div>
 
-    <script type="module" src="https://qqgriggs.github.io/mesto-production/assets/index-B0h-OTGL.js"></script>
+    <script src="./src/scripts/index.js" defer type="module"></script>
 
+    <!-- Шаблон карточки -->
     <template id="card-template">
       <li class="places__item card">
         <img class="card__image" src="" alt="" />
@@ -102,6 +116,22 @@
           </div>
         </div>
       </li>
+    </template>
+
+    <!-- ШАБЛОН ДЛЯ СТРОКИ СТАТИСТИКИ (ДОБАВИТЬ) -->
+    <template id="popup-info-definition-template">
+      <div class="popup__info-item">
+        <span class="popup__info-term"></span>
+        <span class="popup__info-definition"></span>
+      </div>
+    </template>
+
+    <!-- ШАБЛОН ДЛЯ ПОЛЬЗОВАТЕЛЯ (ДОБАВИТЬ) -->
+    <template id="popup-info-user-preview-template">
+      <div class="popup__info-user">
+        <span class="popup__info-user-name"></span>
+        <span class="popup__info-user-count"></span>
+      </div>
     </template>
   </body>
 </html>
