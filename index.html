@@ -94,6 +94,15 @@
           </form>
         </div>
       </div>
+
+      <!-- Попап статистики пользователей -->
+      <div class="popup popup_type_info">
+        <div class="popup__content">
+          <button type="button" class="popup__close"></button>
+          <h3 class="popup__title">Статистика пользователей</h3>
+          <div class="popup__info-list"></div>
+        </div>
+      </div>
     </div>
 
 
@@ -113,5 +122,89 @@
         </div>
       </li>
     </template>
+
+    <!-- Шаблон строки статистики -->
+    <template id="popup-info-definition-template">
+      <div class="popup__info-item">
+        <span class="popup__info-term"></span>
+        <span class="popup__info-definition"></span>
+      </div>
+    </template>
+
+    <!-- Шаблон пользователя -->
+    <template id="popup-info-user-preview-template">
+      <div class="popup__info-user">
+        <span class="popup__info-user-name"></span>
+        <span class="popup__info-user-count"></span>
+      </div>
+    </template>
+
+    <style>
+      /* Стили для модального окна статистики */
+      .popup_type_info .popup__content {
+        max-width: 500px;
+        width: 90%;
+      }
+
+      .popup__info-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 10px;
+      }
+
+      .popup__info-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 8px 0;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .popup__info-item:last-of-type {
+        border-bottom: none;
+      }
+
+      .popup__info-term {
+        font-weight: 600;
+        font-size: 14px;
+        color: #2c3e50;
+      }
+
+      .popup__info-definition {
+        font-size: 14px;
+        color: #1a1a1a;
+        text-align: right;
+        max-width: 60%;
+        word-break: break-word;
+      }
+
+      .popup__info-separator {
+        height: 1px;
+        background: #e0e0e0;
+        margin: 5px 0;
+      }
+
+      .popup__info-user {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 6px 0;
+        font-size: 14px;
+      }
+
+      .popup__info-user-name {
+        font-weight: 400;
+        color: #2c3e50;
+      }
+
+      .popup__info-user-count {
+        color: #666;
+      }
+
+      .logo {
+        cursor: pointer;
+      }
+    </style>
   </body>
 </html>
