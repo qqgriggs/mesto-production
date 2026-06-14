@@ -142,16 +142,9 @@
     <style>
       /* Стили для модального окна статистики */
       .popup_type_info .popup__content {
-        max-width: 550px;
+        max-width: 500px;
         width: 90%;
         padding: 30px 25px;
-      }
-
-      .popup_type_info .popup__title {
-        margin-bottom: 20px;
-        font-size: 24px;
-        font-weight: 900;
-        text-align: center;
       }
 
       .popup__info-list {
@@ -160,59 +153,61 @@
         gap: 12px;
       }
 
-      /* Стиль для строки статистики (как на фото: "Всего карточек: 30") */
       .popup__info-item {
         display: flex;
         justify-content: space-between;
-        align-items: baseline;
         padding: 4px 0;
       }
 
       .popup__info-term {
         font-weight: 400;
         font-size: 14px;
-        color: #000;
       }
 
       .popup__info-definition {
         font-size: 14px;
-        color: #000;
-        text-align: right;
-        font-weight: 400;
       }
 
-      /* Разделитель перед "Все пользователи" */
       .popup__info-separator {
         height: 1px;
         background: #e0e0e0;
         margin: 8px 0;
       }
 
-      /* Заголовок "Все пользователи" */
-      .popup__info-users-title {
-        font-weight: 600;
-        font-size: 16px;
-        margin: 8px 0 4px 0;
-      }
-
-      /* Стиль для строки пользователя */
       .popup__info-user {
         display: flex;
         justify-content: space-between;
-        align-items: baseline;
-        padding: 6px 0;
+        padding: 4px 0;
       }
 
       .popup__info-user-name {
         font-weight: 400;
         font-size: 14px;
-        color: #000;
       }
 
       .popup__info-user-count {
         font-size: 14px;
-        color: #000;
-        font-weight: 400;
+      }
+
+      /* Контейнер для списка пользователей с прокруткой */
+      .popup__info-users-container {
+        max-height: 300px;
+        overflow-y: auto;
+        margin-top: 8px;
+      }
+
+      .popup__info-users-container::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .popup__info-users-container::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+      }
+
+      .popup__info-users-container::-webkit-scrollbar-thumb {
+        background: #c0c0c0;
+        border-radius: 3px;
       }
 
       .logo {
