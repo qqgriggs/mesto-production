@@ -144,13 +144,20 @@
       .popup_type_info .popup__content {
         max-width: 500px;
         width: 90%;
+        padding: 30px 25px;
+      }
+
+      .popup_type_info .popup__title {
+        margin-bottom: 20px;
+        font-size: 24px;
+        font-weight: 900;
+        text-align: center;
       }
 
       .popup__info-list {
         display: flex;
         flex-direction: column;
-        gap: 12px;
-        margin-top: 10px;
+        gap: 15px;
       }
 
       .popup__info-item {
@@ -159,10 +166,6 @@
         align-items: baseline;
         padding: 8px 0;
         border-bottom: 1px solid #e0e0e0;
-      }
-
-      .popup__info-item:last-of-type {
-        border-bottom: none;
       }
 
       .popup__info-term {
@@ -177,20 +180,25 @@
         text-align: right;
         max-width: 60%;
         word-break: break-word;
+        font-weight: 500;
       }
 
       .popup__info-separator {
         height: 1px;
         background: #e0e0e0;
-        margin: 5px 0;
+        margin: 10px 0;
       }
 
       .popup__info-user {
         display: flex;
         justify-content: space-between;
         align-items: baseline;
-        padding: 6px 0;
-        font-size: 14px;
+        padding: 8px 0;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .popup__info-user:last-child {
+        border-bottom: none;
       }
 
       .popup__info-user-name {
@@ -200,6 +208,7 @@
 
       .popup__info-user-count {
         color: #666;
+        font-weight: 500;
       }
 
       .logo {
