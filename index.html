@@ -38,12 +38,14 @@
         <div class="popup__content">
           <button type="button" class="popup__close"></button>
           <h3 class="popup__title">Редактировать профиль</h3>
-          <form class="popup__form" name="edit-profile">
+          <form class="popup__form" name="edit-profile" novalidate>
             <label class="popup__label">
-              <input type="text" name="user-name" id="user-name" class="popup__input popup__input_type_name" placeholder="Имя" />
+              <input type="text" name="user-name" id="user-name" class="popup__input popup__input_type_name" placeholder="Имя" required minlength="2" maxlength="40" />
+              <span class="popup__error" id="user-name-error"></span>
             </label>
             <label class="popup__label">
-              <input type="text" name="user-description" id="user-description" class="popup__input popup__input_type_description" placeholder="Занятие" />
+              <input type="text" name="user-description" id="user-description" class="popup__input popup__input_type_description" placeholder="Занятие" required minlength="2" maxlength="200" />
+              <span class="popup__error" id="user-description-error"></span>
             </label>
             <button type="submit" class="button popup__button">Сохранить</button>
           </form>
@@ -55,12 +57,14 @@
         <div class="popup__content">
           <button type="button" class="popup__close"></button>
           <h3 class="popup__title">Новое место</h3>
-          <form class="popup__form" name="new-place">
+          <form class="popup__form" name="new-place" novalidate>
             <label class="popup__label">
-              <input type="text" name="place-name" id="place-name" class="popup__input popup__input_type_card-name" placeholder="Название" />
+              <input type="text" name="place-name" id="place-name" class="popup__input popup__input_type_card-name" placeholder="Название" required minlength="2" maxlength="30" />
+              <span class="popup__error" id="place-name-error"></span>
             </label>
             <label class="popup__label">
-              <input type="url" name="place-link" id="place-link" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" />
+              <input type="url" name="place-link" id="place-link" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" required />
+              <span class="popup__error" id="place-link-error"></span>
             </label>
             <button type="submit" class="button popup__button">Создать</button>
           </form>
@@ -81,21 +85,13 @@
         <div class="popup__content">
           <button type="button" class="popup__close"></button>
           <h3 class="popup__title">Обновить аватар</h3>
-          <form class="popup__form" name="edit-avatar">
+          <form class="popup__form" name="edit-avatar" novalidate>
             <label class="popup__label">
-              <input type="url" name="user-avatar" id="user-avatar" class="popup__input popup__input_type_avatar" placeholder="Ссылка на изображение" />
+              <input type="url" name="user-avatar" id="user-avatar" class="popup__input popup__input_type_avatar" placeholder="Ссылка на изображение" required />
+              <span class="popup__error" id="user-avatar-error"></span>
             </label>
             <button type="submit" class="button popup__button">Сохранить</button>
           </form>
-        </div>
-      </div>
-
-      <!-- Попап статистики пользователей -->
-      <div class="popup popup_type_info">
-        <div class="popup__content">
-          <button type="button" class="popup__close"></button>
-          <h3 class="popup__title">Статистика пользователей</h3>
-          <div class="popup__info-list"></div>
         </div>
       </div>
     </div>
@@ -116,22 +112,6 @@
           </div>
         </div>
       </li>
-    </template>
-
-    <!-- Шаблон строки статистики -->
-    <template id="popup-info-definition-template">
-      <div class="popup__info-item">
-        <span class="popup__info-term"></span>
-        <span class="popup__info-definition"></span>
-      </div>
-    </template>
-
-    <!-- Шаблон пользователя -->
-    <template id="popup-info-user-preview-template">
-      <div class="popup__info-user">
-        <span class="popup__info-user-name"></span>
-        <span class="popup__info-user-count"></span>
-      </div>
     </template>
   </body>
 </html>
